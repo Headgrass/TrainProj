@@ -1,37 +1,67 @@
 package ru.geekbrains.trainproj.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ru.geekbrains.trainproj.data.entity.Note
+import java.util.*
 
 object NotesRepository {
-    private val notes: List<Note> = listOf(
-        Note("Первая заметка",
+
+    private val notesLiveData = MutableLiveData<List<Note>>()
+
+    private val notes = mutableListOf(
+        Note(UUID.randomUUID().toString(),
+            "Первая заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xfff06292.toInt()
+            Note.Color.WHITE
         ),
-        Note("Вторая заметка",
+        Note(UUID.randomUUID().toString(),
+            "Вторая заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xff9575cd.toInt()
+            Note.Color.VIOLET
         ),
-        Note("Третья заметка",
+        Note(UUID.randomUUID().toString(),
+            "Третья заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xff64b5f6.toInt()
+            Note.Color.YELLOW
         ),
-        Note("Четвертая заметка",
+        Note(UUID.randomUUID().toString(),
+            "Четвертая заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xff4db6ac.toInt()
+            Note.Color.RED
         ),
-        Note("Пятая заметка",
+        Note(UUID.randomUUID().toString(),
+            "Пятая заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xffb2ff59.toInt()
+            Note.Color.PINK
         ),
-        Note("Шестая заметка",
+        Note(UUID.randomUUID().toString(),
+            "Шестая заметка",
             "Текст первой заметкию Не очень длинный, но интересный",
-            0xffffeb3b.toInt()
+            Note.Color.GREEN
         )
     )
 
+    init {
+        notesLiveData.value = notes
+    }
 
-    fun getNotes(): List<Note> {
-        return notes
+    fun getNotes(): LiveData<List<Note>> {
+        return notesLiveData
+    }
+
+    fun saveNote(note: Note){
+        addOnReplace(note)
+        notesLiveData.value = notes
+    }
+
+   private fun addOnReplace(note: Note){
+        for (i in 0 until notes.size ){
+            if(notes[i] == note){
+                notes[i] = note
+                return
+            }
+        }
+        notes.add(note)
     }
 }

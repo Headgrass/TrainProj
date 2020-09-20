@@ -1,4 +1,4 @@
-package ru.geekbrains.trainproj
+package ru.geekbrains.trainproj.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.geekbrains.trainproj.R
 import ru.geekbrains.trainproj.ui.main.MainViewModel
 import ru.geekbrains.trainproj.ui.main.NotesRVAdapter
+import ru.geekbrains.trainproj.ui.note.NoteActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,13 +21,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        adapter = NotesRVAdapter()
+        adapter = NotesRVAdapter{
+            NoteActivity.start(this, it)
+        }
         rv_notes.adapter = adapter
 
         viewModel.getViewState().observe(this, Observer { value ->
             value?.let { adapter.notes = it.notes }
         })
+
+        fab.setOnClickListener {
+            NoteActivity.start(this)
+        }
     }
 }
