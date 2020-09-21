@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-class Note(
-    var id: String,
+data class Note(
+    var id: String = "",
     var title: String = "",
     var text: String = "",
     var color: Color = Color.WHITE,
