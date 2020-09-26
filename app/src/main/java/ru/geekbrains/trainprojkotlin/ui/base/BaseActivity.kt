@@ -52,7 +52,7 @@ abstract class BaseActivity<T, S : BaseViewState<T>> : AppCompatActivity() {
 
         val intent = AuthUI.getInstance()
             .createSignInIntentBuilder()
-            .setLogo(R.drawable.android_robot_background)
+            .setLogo(R.drawable.android_robot)
             .setTheme(R.style.LoginStyle)
             .setAvailableProviders(providers)
             .build()

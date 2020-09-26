@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="4dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    tools:backgroundTint="@android:color/holo_purple">
+    android:layout_margin="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,20 +13,20 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            tools:text="Geekbrains + Kotlin forever"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="Very important note"/>
 
         <TextView
             android:id="@+id/tv_text"
-            style="@style/TextAppearance.AppCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            tools:text="Я Kotlin бы выучил только за то, что на нем разрабатывал Вортон!"/>
+            tools:text="My very important note text with very important information"/>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

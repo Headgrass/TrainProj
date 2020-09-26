@@ -1,21 +1,21 @@
 package ru.geekbrains.trainprojkotlin.ui.splash
 
-import androidx.lifecycle.ViewModel
+import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import ru.geekbrains.trainprojkotlin.ui.base.BaseActivity
 
 import ru.geekbrains.trainprojkotlin.ui.main.MainActivity
 
 class SplashActivity : BaseActivity<Boolean?, SplashViewState>() {
     override val viewModel: SplashViewModel by lazy {
-        ViewModelProviders.of(this).get(SplashViewModel::class.java)
+        ViewModelProvider(this).get(SplashViewModel::class.java)
     }
 
     override val layoutRes = null
 
     override fun onResume() {
         super.onResume()
+        Handler().postDelayed({viewModel.requestUser()}, 1000)
         viewModel.requestUser()
     }
 
