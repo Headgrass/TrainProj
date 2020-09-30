@@ -1,15 +1,12 @@
 package ru.geekbrains.trainprojkotlin.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import ru.geekbrains.trainprojkotlin.data.NotesRepository
 import ru.geekbrains.trainprojkotlin.data.entity.Note
 import ru.geekbrains.trainprojkotlin.data.model.NoteResult
 import ru.geekbrains.trainprojkotlin.ui.base.BaseViewModel
 
-class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
+class MainViewModel(notesRepository: NotesRepository) : BaseViewModel<List<Note>?, MainViewState>() {
 
     private val notesObserver = Observer<NoteResult>{result ->
         result ?: return@Observer
@@ -19,7 +16,7 @@ class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
         }
     }
 
-  private val repositoryNotes = NotesRepository.getNotes()
+  private val repositoryNotes = notesRepository.getNotes()
     init {
         viewStateLiveData.value = MainViewState()
         repositoryNotes.observeForever(notesObserver)

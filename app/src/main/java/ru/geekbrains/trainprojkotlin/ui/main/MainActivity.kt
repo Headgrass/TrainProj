@@ -6,22 +6,23 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import ru.geekbrains.trainprojkotlin.R
 import ru.geekbrains.trainprojkotlin.data.entity.Note
+import ru.geekbrains.trainprojkotlin.data.provider.FirestoreProvider
 import ru.geekbrains.trainprojkotlin.ui.base.BaseActivity
 import ru.geekbrains.trainprojkotlin.ui.note.NoteActivity
 import ru.geekbrains.trainprojkotlin.ui.splash.SplashActivity
 
-
 class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
 
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
+    val firestoreProvider: FirestoreProvider by inject()
+
+    override val viewModel: MainViewModel by viewModel()
     lateinit var adapter: NotesRVAdapter
     override val layoutRes: Int = R.layout.activity_main
 
