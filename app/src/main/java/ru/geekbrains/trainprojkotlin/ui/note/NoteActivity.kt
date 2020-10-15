@@ -90,6 +90,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         }
     }
 
+
     private fun saveNote() {
         et_title.text?.let {
             if (it.length < 3) return

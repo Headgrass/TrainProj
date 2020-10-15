@@ -3,13 +3,11 @@ package ru.geekbrains.trainprojkotlin.ui.customviews
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
-import androidx.core.view.setPadding
 import ru.geekbrains.trainprojkotlin.data.entity.Note
 import ru.geekbrains.trainprojkotlin.extensions.dip
 import ru.geekbrains.trainprojkotlin.extensions.getColorRes
@@ -21,7 +19,7 @@ private const val SCALE = "scale"
 
 class ColorPickerView : LinearLayout {
 
-    var onColorClickListener: (color: Color) -> Unit = { }
+    var onColorClickListener: (color: Note.Color) -> Unit = { }
 
     val isOpen: Boolean
         get() = measuredHeight > 0
@@ -64,12 +62,12 @@ class ColorPickerView : LinearLayout {
         Note.Color.values().forEach { color ->
             addView(
                 ColorCircleView(context).apply {
-                    fillColorRes = color.getColorRes(context)
+                    fillColorRes = color.getColorRes()
                     tag = color
                     dip(COLOR_VIEW_PADDING).let {
                         setPadding(it.toInt(), it.toInt(), it.toInt(), it.toInt())
                     }
-                    setOnClickListener { onColorClickListener(it.tag as Color) }
+                    setOnClickListener { onColorClickListener(it.tag as Note.Color) }
                 })
         }
 

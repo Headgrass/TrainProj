@@ -35,7 +35,7 @@ class FirestoreProvider(val firebaseAuth: FirebaseAuth, val store: FirebaseFires
         try {
             notesReference.addSnapshotListener { snapshot, e ->
                 e?.let {
-
+                    value = NoteResult.Error(it)
                 } ?: snapshot?.let {
                     val notes = snapshot.documents.mapNotNull { it.toObject(Note::class.java) }
                     value = NoteResult.Success(notes)
@@ -49,7 +49,7 @@ class FirestoreProvider(val firebaseAuth: FirebaseAuth, val store: FirebaseFires
     override fun saveNote(note: Note): LiveData<NoteResult> = MutableLiveData<NoteResult>().apply {
         try {
             notesReference.document(note.id).set(note)
-                .addOnSuccessListener { snapshot ->
+                .addOnSuccessListener {
                     value = NoteResult.Success(note)
                 }.addOnFailureListener {
                     value = NoteResult.Error(it)

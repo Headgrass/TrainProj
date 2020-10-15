@@ -9,6 +9,6 @@ class NotesRepository(val dataProvider: DataProvider) {
     fun getNotes() = dataProvider.subscribeToAllNotes()
     fun saveNote(note: Note) = dataProvider.saveNote(note)
     fun getNoteById(id: String) = dataProvider.getNoteById(id)
-    fun deleteNote(id: String) = dataProvider.getNoteById(id)
+    fun deleteNote(id: String) = dataProvider.deleteNote(id)
 
 }
